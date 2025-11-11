@@ -47,7 +47,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
                 List.of(
-                       "http://127.0.0.1:5500/", "http://localhost:5173", "http://172.20.10.2:5173", "http://localhost:8080"
+                       "https://tvoy-znak.vercel.app/", "http://localhost:5173", "http://172.20.10.2:5173", "http://localhost:8080" 
                 )
         );
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
