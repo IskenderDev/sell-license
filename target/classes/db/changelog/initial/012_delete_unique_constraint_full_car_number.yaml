@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: remove_unique_constraint_full_car_number
+      author: Argen
+      changes:
+        - dropUniqueConstraint:
+            tableName: car_number_lots
+            constraintName: car_number_lots_full_car_number_key
+            columnNames: full_car_number

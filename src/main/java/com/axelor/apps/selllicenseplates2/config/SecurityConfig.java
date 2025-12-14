@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/posts/**").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/posts").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/car-number-lots").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/api/car-number-lots").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/car-number-lots/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
@@ -42,8 +42,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    CorsConfigurationSource
-    corsConfigurationSource() {
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
                 List.of(
