@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-12-14T20:07:04+0600",
+    date = "2025-12-28T17:29:42+0600",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.9 (Microsoft)"
 )
 @Component
@@ -59,6 +59,7 @@ public class CarNumberLotMapperImpl implements CarNumberLotMapper {
 
         carNumberLotAdminDto.setRegionCode( carNumberLotRegionRegionCode( carNumberLot ) );
         carNumberLotAdminDto.setFullName( carNumberLotAuthorFullName( carNumberLot ) );
+        carNumberLotAdminDto.setOriginalPhoneNumber( carNumberLotAuthorOriginalPhoneNumber( carNumberLot ) );
         carNumberLotAdminDto.setId( carNumberLot.getId() );
         carNumberLotAdminDto.setFullCarNumber( carNumberLot.getFullCarNumber() );
         carNumberLotAdminDto.setFirstLetter( carNumberLot.getFirstLetter() );
@@ -135,5 +136,20 @@ public class CarNumberLotMapperImpl implements CarNumberLotMapper {
             return null;
         }
         return regionCode;
+    }
+
+    private String carNumberLotAuthorOriginalPhoneNumber(CarNumberLot carNumberLot) {
+        if ( carNumberLot == null ) {
+            return null;
+        }
+        User author = carNumberLot.getAuthor();
+        if ( author == null ) {
+            return null;
+        }
+        String originalPhoneNumber = author.getOriginalPhoneNumber();
+        if ( originalPhoneNumber == null ) {
+            return null;
+        }
+        return originalPhoneNumber;
     }
 }

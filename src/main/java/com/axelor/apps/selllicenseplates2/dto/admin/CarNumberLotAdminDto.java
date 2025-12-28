@@ -26,6 +26,7 @@ public class CarNumberLotAdminDto {
     private BigDecimal originalPrice;
     private BigDecimal markupPrice;
     private String phoneNumber;
+    private String originalPhoneNumber;
     private String fullName;
     private Instant createdDate;
     private Instant updatedDate;

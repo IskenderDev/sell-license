@@ -148,6 +148,7 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
         existingLot.setFirstDigit(request.getFirstDigit());
         existingLot.setSecondDigit(request.getSecondDigit());
         existingLot.setThirdDigit(request.getThirdDigit());
+        existingLot.setMarkupPrice(request.getMarkupPrice());
         carNumberLotRepository.save(existingLot);
 
         return carNumberLotMapper.toAdminDto(existingLot);

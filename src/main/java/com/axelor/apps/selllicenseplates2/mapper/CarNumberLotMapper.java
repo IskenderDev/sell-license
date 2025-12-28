@@ -19,6 +19,7 @@ public interface CarNumberLotMapper {
 
     @Mapping(target = "regionCode", source = "region.regionCode")
     @Mapping(target = "fullName", source = "author.fullName")
+    @Mapping(target = "originalPhoneNumber", source = "author.originalPhoneNumber")
     CarNumberLotAdminDto toAdminDto(CarNumberLot carNumberLot);
 
     List<CarNumberLotDto> toListDto(List<CarNumberLot> carNumberLots);
