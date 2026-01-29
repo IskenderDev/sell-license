@@ -16,8 +16,13 @@ spring:
     properties:
       mail:
         smtp:
-          auth: trued
+          auth: true
           starttls.enable: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB       
+      max-request-size: 20MB    
 
 server:
   port: 8081
