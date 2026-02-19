@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CarNumberLotCreateRequest {
 
-    private BigDecimal price;
+    private BigDecimal originalPrice;
     private String firstLetter;
     private String secondLetter;
     private String thirdLetter;

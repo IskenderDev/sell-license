@@ -23,7 +23,8 @@ public class CarNumberLotDto {
     private String thirdDigit;
 
     private String regionCode;
-    private BigDecimal price;
+    private BigDecimal originalPrice;
+    private BigDecimal markupPrice;
     private String phoneNumber;
     private String fullName;
     private Instant createdDate;

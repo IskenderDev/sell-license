@@ -15,7 +15,7 @@ public class CarNumberLotUpdateAdminRequest {
 
     private Long regionId;
 
-    private BigDecimal markupPrice;
+    private BigDecimal originalPrice;
 
     private String comment;
 
