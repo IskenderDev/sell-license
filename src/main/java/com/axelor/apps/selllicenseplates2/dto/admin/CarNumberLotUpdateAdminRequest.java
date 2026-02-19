@@ -1,5 +1,6 @@
 package com.axelor.apps.selllicenseplates2.dto.admin;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ public class CarNumberLotUpdateAdminRequest {
 
     private Long regionId;
 
+    @JsonAlias("price")
     private BigDecimal originalPrice;
 
     private String comment;
