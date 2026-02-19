@@ -1,5 +1,6 @@
 package com.axelor.apps.selllicenseplates2.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CarNumberLotUpdateRequest {
 
-    private BigDecimal price;
+    @JsonAlias("price")
+    private BigDecimal originalPrice;
     private String firstLetter;
     private String secondLetter;
     private String thirdLetter;

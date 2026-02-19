@@ -14,7 +14,6 @@ public interface CarNumberLotMapper {
 
     @Mapping(target = "fullName", source = "author.fullName")
     @Mapping(target = "regionCode", source = "region.regionCode")
-    @Mapping(target = "price", source = "markupPrice")
     CarNumberLotDto toDto(CarNumberLot carNumberLot);
 
     @Mapping(target = "regionCode", source = "region.regionCode")

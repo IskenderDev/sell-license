@@ -29,6 +29,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+import static java.math.RoundingMode.HALF_UP;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -39,8 +41,6 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
     private final RegionService regionService;
     private final UserService userService;
 
-    @Value("${app.markup.percent}")
-    private Integer percentMarkup;
     @Value("${app.defaultPhoneNumber}")
     private String changeNumber;
 
@@ -123,6 +123,11 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
 
             existingLot.setRegion(region);
 
+            if (request.getOriginalPrice() != null) {
+                existingLot.setOriginalPrice(request.getOriginalPrice());
+                existingLot.setMarkupPrice(calculateMarkupPrice(request.getOriginalPrice()));
+            }
+
             existingLot.setUpdatedDate(Instant.now());
             carNumberLotRepository.save(existingLot);
             return carNumberLotMapper.toDto(existingLot);
@@ -148,7 +153,10 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
         existingLot.setFirstDigit(request.getFirstDigit());
         existingLot.setSecondDigit(request.getSecondDigit());
         existingLot.setThirdDigit(request.getThirdDigit());
-        existingLot.setMarkupPrice(request.getMarkupPrice());
+        if (request.getOriginalPrice() != null) {
+            existingLot.setOriginalPrice(request.getOriginalPrice());
+            existingLot.setMarkupPrice(calculateMarkupPrice(request.getOriginalPrice()));
+        }
         carNumberLotRepository.save(existingLot);
 
         return carNumberLotMapper.toAdminDto(existingLot);
@@ -189,18 +197,16 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
 
         Region region = regionService.getRegionById(request.getRegionId());
 
-        BigDecimal markupPrice = request.getPrice() == null ? BigDecimal.ZERO :
-                request.getPrice().multiply(BigDecimal.valueOf(percentMarkup)).divide(BigDecimal.valueOf(100));
-
-        BigDecimal finalPrice = request.getPrice() == null ? BigDecimal.ZERO :
-                request.getPrice().add(markupPrice);
+        BigDecimal originalPrice = request.getOriginalPrice() == null
+                ? BigDecimal.ZERO
+                : request.getOriginalPrice();
 
         return CarNumberLot.builder()
                 .firstDigit(request.getFirstDigit())
                 .comment(request.getComment())
                 .createdDate(Instant.now())
                 .firstLetter(request.getFirstLetter())
-                .originalPrice(request.getPrice())
+                .originalPrice(originalPrice)
                 .secondDigit(request.getSecondDigit())
                 .region(region)
                 .isSold(false)
@@ -211,8 +217,13 @@ public class CarNumberLotServiceImpl implements CarNumberLotService {
                 .secondLetter(request.getSecondLetter())
                 .thirdLetter(request.getThirdLetter())
                 .fullCarNumber(fullNumber)
-                .markupPrice(finalPrice)
+                .markupPrice(calculateMarkupPrice(originalPrice))
                 .build();
     }
+
+    private BigDecimal calculateMarkupPrice(BigDecimal originalPrice) {
+        return originalPrice.multiply(BigDecimal.valueOf(1.2)).setScale(2, HALF_UP);
+    }
+
 
 }
