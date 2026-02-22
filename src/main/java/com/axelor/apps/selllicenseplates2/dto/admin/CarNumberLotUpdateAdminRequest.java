@@ -17,7 +17,7 @@ public class CarNumberLotUpdateAdminRequest {
     private Long regionId;
 
     @JsonAlias("price")
-    private BigDecimal originalPrice;
+    private BigDecimal markupPrice;
 
     private String comment;
 

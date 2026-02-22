@@ -7,12 +7,14 @@ import com.axelor.apps.selllicenseplates2.dto.admin.UserAdminUpdateDto;
 import com.axelor.apps.selllicenseplates2.service.AdminService;
 import com.axelor.apps.selllicenseplates2.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/admin")
 public class AdminController {
@@ -39,6 +41,7 @@ public class AdminController {
 
     @PutMapping("/car-number-lots/{lotId}")
     public ResponseEntity<CarNumberLotAdminDto> updateCarNumberLot(@PathVariable(name = "lotId") Long lotId, @RequestBody CarNumberLotUpdateAdminRequest request) {
+        log.info("Incoming markupPrice for lotId {}: {}", lotId, request.getMarkupPrice());
         CarNumberLotAdminDto updatedLot = adminService.updateCarNumberLot(lotId, request);
         return ResponseEntity.ok(updatedLot);
     }
