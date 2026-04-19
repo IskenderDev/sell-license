@@ -31,6 +31,6 @@ server:
 
 app:
   defaultPhoneNumber: +996550150176
-  feedbackRecipientEmail: iskeg76@gmail.com
+  feedbackRecipientEmail: znakonet@yandex.ru
   markup:
     percent: 20
