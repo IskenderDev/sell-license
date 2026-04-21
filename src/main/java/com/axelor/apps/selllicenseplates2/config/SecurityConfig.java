@@ -46,7 +46,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
                 List.of(
-                    "http://localhost:5173", "http://31.172.72.119:8080", "http://znako.net:8080/", "https://znako.net", "https://znako.net:8080"
+                    "http://localhost:5173", "http://31.172.72.119:8080", "http://znako.net:8080/", "https://znako.net", "https://znako.net:8080", "http://znako.net", "https://znako.net"
                 )
         );
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
