@@ -17,12 +17,13 @@ spring:
       mail:
         smtp:
           auth: true
-          starttls.enable: true
+          starttls:
+            enable: true
 
   servlet:
     multipart:
-      max-file-size: 20MB       
-      max-request-size: 20MB    
+      max-file-size: 50MB
+      max-request-size: 50MB
 
 server:
   port: 8081
@@ -30,5 +31,6 @@ server:
 
 app:
   defaultPhoneNumber: +7(995)920-20-90
+  feedbackRecipientEmail: znakonet@yandex.ru
   markup:
     percent: 20

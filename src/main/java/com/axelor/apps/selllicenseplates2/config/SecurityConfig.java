@@ -1,5 +1,8 @@
 package com.axelor.apps.selllicenseplates2.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,9 +16,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 public class SecurityConfig {
 
@@ -27,16 +27,16 @@ public class SecurityConfig {
                 .formLogin(FormLoginConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/admin/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/posts/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/posts").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/car-number-lots").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/car-number-lots/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated())
+                .requestMatchers("/api/admin/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/posts/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/posts/**").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/posts").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/car-number-lots").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/car-number-lots/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/**").permitAll()
+                .anyRequest().authenticated())
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
@@ -46,7 +46,14 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
                 List.of(
-                    "http://localhost:5173", "http://31.172.72.119:8080", "http://znako.net:8080/", "https://znako.net", "https://znako.net:8080", "http://znako.net", "https://znako.net"
+                        "http://localhost:5173",
+                        "http://127.0.0.1:5173",
+                        "http://31.172.72.119",
+                        "http://31.172.72.119:8080",
+                        "http://znako.net/",
+                        "https://znako.net/",
+                        "http://www.znako.net",
+                        "https://www.znako.net"
                 )
         );
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH"));
